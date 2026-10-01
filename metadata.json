@@ -1,0 +1,6 @@
+{
+  "name": "AstroSage AI",
+  "description": "Vedic Astrology, Kundali generation with Swiss Ephemeris calculations, Kundli matching, Panchang, and Gemini AI Astrologer predictions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
