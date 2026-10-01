@@ -5,6 +5,9 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build APK and AAB
@@ -23,20 +26,36 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Prepare Keystore and Environment
+        run: |
+          if [ -f debug.keystore.base64 ]; then
+            base64 -d debug.keystore.base64 > debug.keystore
+          else
+            keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+          if [ ! -f .env ]; then
+            cp .env.example .env 2>/dev/null || touch .env
+          fi
+
       - name: Build Test APK (Debug)
-        run: gradle :app:assembleDebug
+        run: ./gradlew :app:assembleDebug
 
       - name: Build Play Store App Bundle (AAB)
-        run: gradle :app:bundleDebug
+        run: ./gradlew :app:bundleDebug
 
       - name: Upload Test APK
         uses: actions/upload-artifact@v4
         with:
           name: AstroSage-Test-APK
           path: app/build/outputs/apk/debug/*.apk
+          retention-days: 30
 
       - name: Upload Play Store AAB Bundle
         uses: actions/upload-artifact@v4
         with:
           name: AstroSage-PlayStore-AAB
           path: app/build/outputs/bundle/debug/*.aab
+          retention-days: 30
