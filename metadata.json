@@ -1,0 +1,8 @@
+{
+  "name": "AstroSage",
+  "description": "Vedic Astrology, Kundali & Dainik Panchang app with realistic Vedic calculations",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AstroSage</string>
+    <string name="panchang_title">दैनिक पंचांग (Daily Panchang)</string>
+    <string name="kundali_title">कुंडली एवं ज्योतिष (Kundali)</string>
+    <string name="horoscope_title">दैनिक राशिफल (Horoscope)</string>
+    <string name="muhurat_title">शुभ मुहूर्त व चौघड़िया</string>
+</resources>
